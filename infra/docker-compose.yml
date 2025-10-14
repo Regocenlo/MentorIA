@@ -1,0 +1,17 @@
+services:
+  backend:
+    build: ../backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../progreso:/app/progreso
+    environment:
+      - NODE_ENV=development
+  ollama:
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+volumes:
+  ollama-data:
