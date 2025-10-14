@@ -1,0 +1,34 @@
+# Node.js (backend y frontend)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/
+build/
+
+# Docker
+*.log
+*.pid
+docker-compose.override.yml
+.env
+.env.local
+.env.*.local
+
+# Ollama (modelos descargados)
+ollama-data/
+
+# Archivos de progreso
+progreso/*.json
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# IDEs y editores
+.vscode/
+.idea/
+*.swp
+
+# WSL y Linux
+*.sock
+*.lock
