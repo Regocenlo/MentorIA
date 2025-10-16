@@ -1,7 +1,7 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const challengeRoutes = require('./routes/challenge');
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import challengeRoutes from './routes/challenge.js';
 
 const app = express();
 app.use(cors());
