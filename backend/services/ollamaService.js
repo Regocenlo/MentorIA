@@ -5,16 +5,21 @@ const OLLAMA_URL = 'http://ollama:11434/api/generate';
 //En los parametros define valores por defecto
 async function generarDesafio({ lenguaje = 'JavaScript', nivel = 'principiante' }) {
   
-  const prompt = `Genera un desafío de programación para ${nivel} en ${lenguaje}. 
-Tu respuesta tiene que ser un json con el siguiente formato: 
+  const prompt = `Soy un estudiante autodidacta de ${lenguaje}, mi nivel de conocimiento es ${nivel}. A continuacion necesito que plantees 10 desafios, solo quiero la consigna, que a prueba mis conocimientos. 
+  Tu respuesta debe tener el siguiente formato:
 {
-Nivel: "<El nivel de dificultad>",
-Lenguaje: "<El lenguaje de programacion>",
-Desafio: "<El desafio que propones>
+"EJercicio 1": "<Aqui tu ejercicio>"
+"EJercicio 2": "<Aqui tu ejercicio>"
+"EJercicio 3": "<Aqui tu ejercicio>"
+"EJercicio 4": "<Aqui tu ejercicio>"
+"EJercicio 5": "<Aqui tu ejercicio>"
+"EJercicio 6": "<Aqui tu ejercicio>"
+"EJercicio 7": "<Aqui tu ejercicio>"
+"EJercicio 8": "<Aqui tu ejercicio>"
+"EJercicio 9": "<Aqui tu ejercicio>"
+"EJercicio 10": "<Aqui tu ejercicio>"
 }
-
-Tu respuesta no debe contener encabezado ni conclusion ni cualquier otro formato que no sea el json que te solicite.
-".`;
+`;
 
   const response = await axios.post(OLLAMA_URL, {
     model: 'deepseek-coder',
@@ -24,6 +29,25 @@ Tu respuesta no debe contener encabezado ni conclusion ni cualquier otro formato
 
   const raw = response.data.response;
   console.log(raw);
-  return { raw };
+  const json = extractJson(raw);
+  return json;
+
 }
+
+function extractJson(texto) {
+  const inicio = texto.indexOf('{');
+  const fin = texto.lastIndexOf('}');
+  if (inicio === -1 || fin === -1 || fin <= inicio) {
+    throw new Error('No se encontró un bloque JSON válido');
+  }
+
+  const jsonStr = texto.slice(inicio, fin + 1);
+
+  try {
+    return JSON.parse(jsonStr);
+  } catch (err) {
+    throw new Error('El bloque JSON extraído no es válido');
+  }
+}
+
 module.exports = { generarDesafio };
