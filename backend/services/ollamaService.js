@@ -1,9 +1,9 @@
-const axios = require('axios');
+import axios from 'axios'
 
 const OLLAMA_URL = 'http://ollama:11434/api/generate';
 
 //En los parametros define valores por defecto
-async function generarDesafio({ lenguaje = 'JavaScript', nivel = 'principiante' }) {
+export async function generarDesafio({ lenguaje = 'JavaScript', nivel = 'principiante' }) {
   
   const prompt = `Soy un estudiante autodidacta de ${lenguaje}, mi nivel de conocimiento es ${nivel}. A continuacion necesito que plantees 10 desafios, solo quiero la consigna, que a prueba mis conocimientos. 
   Tu respuesta debe tener el siguiente formato:
@@ -49,5 +49,3 @@ function extractJson(texto) {
     throw new Error('El bloque JSON extraído no es válido');
   }
 }
-
-module.exports = { generarDesafio };

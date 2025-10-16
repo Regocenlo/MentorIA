@@ -1,7 +1,7 @@
-const express = require('express');
-const router = express.Router();
-const { generarDesafio } = require('../services/ollamaService');
+import express from 'express';
+import { generarDesafio } from '../services/ollamaService.js';
 
+const router = express.Router();
 //Declaracion del endpoint
 router.post('/generate_challenge', async (req, res) => {
   const { lenguaje, nivel } = req.body;
@@ -16,4 +16,4 @@ router.post('/generate_challenge', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
