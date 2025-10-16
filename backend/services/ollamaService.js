@@ -22,7 +22,7 @@ async function generarDesafio({ lenguaje = 'JavaScript', nivel = 'principiante' 
 `;
 
   const response = await axios.post(OLLAMA_URL, {
-    model: 'deepseek-coder',
+    model: 'codellama:7b',
     prompt,
     stream: false
   });
