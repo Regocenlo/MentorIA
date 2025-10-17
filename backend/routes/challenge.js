@@ -3,7 +3,7 @@ import { generarDesafio } from '../services/ollamaService.js';
 
 const router = express.Router();
 //Declaracion del endpoint
-router.post('/generate_challenge', async (req, res) => {
+router.post('/api/generate_challenge', async (req, res) => {
   const { lenguaje, nivel } = req.body;
 
   try {
