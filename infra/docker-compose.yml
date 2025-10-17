@@ -7,6 +7,13 @@ services:
       - ../progreso:/app/progreso
     environment:
       - NODE_ENV=development
+  frontend:
+    build:
+      context: ../frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
   ollama:
     image: ollama/ollama
     ports:
