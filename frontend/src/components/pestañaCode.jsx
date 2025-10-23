@@ -7,6 +7,8 @@ async function llamado(code){
   const response = await axios.post('/api/feedback_solution', {
     codigo: code
   });
+  const raw = response.data.response;
+  console.log(raw);
 }
 
 export default function App() {
