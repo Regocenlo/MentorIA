@@ -6,17 +6,17 @@ const OLLAMA_URL = 'http://ollama:11434/api/generate';
 export async function generarDesafio({ lenguaje = 'JavaScript', nivel = 'principiante' }) {
   
   const prompt = `Soy un estudiante autodidacta de ${lenguaje}, mi nivel de conocimiento es ${nivel}. A continuacion necesito que plantees 10 desafios, solo quiero la consigna, que a prueba mis conocimientos. 
-  Tu respuesta debe tener el siguiente formato:
+  Tu respuesta debe tener el siguiente formato de un json:
 {
-"EJercicio 1": "<Aqui tu ejercicio>"
-"EJercicio 2": "<Aqui tu ejercicio>"
-"EJercicio 3": "<Aqui tu ejercicio>"
-"EJercicio 4": "<Aqui tu ejercicio>"
-"EJercicio 5": "<Aqui tu ejercicio>"
-"EJercicio 6": "<Aqui tu ejercicio>"
-"EJercicio 7": "<Aqui tu ejercicio>"
-"EJercicio 8": "<Aqui tu ejercicio>"
-"EJercicio 9": "<Aqui tu ejercicio>"
+"EJercicio 1": "<Aqui tu ejercicio>",
+"EJercicio 2": "<Aqui tu ejercicio>",
+"EJercicio 3": "<Aqui tu ejercicio>",
+"EJercicio 4": "<Aqui tu ejercicio>",
+"EJercicio 5": "<Aqui tu ejercicio>",
+"EJercicio 6": "<Aqui tu ejercicio>",
+"EJercicio 7": "<Aqui tu ejercicio>",
+"EJercicio 8": "<Aqui tu ejercicio>",
+"EJercicio 9": "<Aqui tu ejercicio>",
 "EJercicio 10": "<Aqui tu ejercicio>"
 }
 `;
