@@ -4,7 +4,8 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ../progreso:/app/progreso
+      - ../backend:/app         # bind mount de todo el backend
+      - /app/node_modules       # evita sobrescribir node_modules del contenedor
     environment:
       - NODE_ENV=development
   frontend:
@@ -27,5 +28,7 @@ services:
       - OLLAMA_LOW_VRAM_THRESHOLD=6GiB
     volumes:
       - ollama-data:/root/.ollama
+    entrypoint: >
+      sh -c "ollama serve & sleep 5 && ollama pull codellama:7b && wait"  
 volumes:
   ollama-data:
