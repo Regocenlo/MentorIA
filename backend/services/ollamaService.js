@@ -4,20 +4,24 @@ const OLLAMA_URL = 'http://ollama:11434/api/generate';
 
 //Funcion para extraer solo el JSON de las respuestas de ollama
 function extractJson(texto) {
-  const inicio = texto.indexOf('{');
-  const fin = texto.lastIndexOf('}');
+  // Limpia posibles bloques markdown
+  const limpio = texto.replace(/```(?:json)?/gi, '').trim();
+
+  const inicio = limpio.indexOf('{');
+  const fin = limpio.lastIndexOf('}');
   if (inicio === -1 || fin === -1 || fin <= inicio) {
     throw new Error('No se encontró un bloque JSON válido');
   }
 
-  const jsonStr = texto.slice(inicio, fin + 1);
+  const jsonStr = limpio.slice(inicio, fin + 1);
 
   try {
     return JSON.parse(jsonStr);
   } catch (err) {
-    throw new Error('El bloque JSON extraído no es válido');
+    throw new Error('El bloque JSON extraído no es válido: ' + err.message);
   }
 }
+
 
 //Funcion para devolver los ejercicios para el usuario
 //En los parametros define valores por defecto
@@ -85,31 +89,52 @@ ${codigo}
 export async function revisionSolucion({desafio, codigo, output}) {
 
   const prompt = `
-Eres un asistente que corrige código de programación.
-Analiza cuidadosamente este código del usuario:
-${codigo}
+Eres un asistente experto en programación que analiza código y detecta errores.
 
-Este código intenta resolver el enunciado:
-${desafio}
-
-La salida que produjo al ejecutarlo fue:
-${output}
+Te proporcionaré un objeto con los siguientes campos:
+{
+  "codigo": ${codigo},
+  "desafio": ${desafio},
+  "output": ${output}
+}
 
 Tu tarea es:
-1. Determinar si el código es correcto comparando la salida con la esperada según el enunciado.
-2. Dar un feedback breve sobre qué se hizo bien o sugerencias de mejora.
-3. Si hay errores, listar de forma clara y concisa los problemas o cosas a corregir.
+1. Comprender qué intenta hacer el código según el "desafio".
+2. Determinar cuál sería la **salida esperada** si estuviera correcto.
+3. Comparar la salida esperada con la salida real ("output").
+4. Si coinciden → success: true  
+  Si difieren → success: false
+5. Si hay error, indica de forma breve:
+  - En qué línea se encuentra el problema (por número aproximado o descripción clara).
+  - Qué está mal y qué debería hacerse para corregirlo.
 
-⚠️ Devuelve **solo un JSON válido**, sin explicaciones adicionales ni comentarios.  
-⚠️ Si no hay errores, solution debe ser "", si no hay feedback, feedback debe ser "".
+Formato OBLIGATORIO de respuesta (sin explicaciones fuera del JSON):
 
-Formato esperado:
 {
   "success": <true o false>,
-  "feedback": "<mensaje de feedback o ''>",
-  "solution": "<listado de correcciones o ''>"
+  "feedback": "<mensaje breve indicando si la salida es correcta o no>",
+  "solution": "<explicación ordenada del error con número de línea y corrección sugerida, o '' si no hay errores>"
+}
+
+Reglas:
+- Siempre responde en **español**.
+- Si no hay errores, "solution" debe ser "".
+- No incluyas comentarios, texto fuera del JSON ni explicaciones adicionales.
+- "feedback" debe describir claramente si la salida coincide o cuál es la diferencia.
+- "solution" debe ser un texto legible (no un array), por ejemplo:
+  "Error en la línea 3: se usa '-' en lugar de '+'. Debería sumarse numero1 y numero2."
+
+Ejemplo esperado:
+
+{
+  "success": false,
+  "feedback": "La salida esperada debe ser 'La suma es: 8', pero la salida real fue 'La suma es: 2'.",
+  "solution": "Error en la línea 3: se usa '-' en lugar de '+'. Debería sumarse numero1 y numero2."
 }
 `;
+
+
+
 
   const response = await axios.post(OLLAMA_URL, {
     model: 'codellama:7b',
