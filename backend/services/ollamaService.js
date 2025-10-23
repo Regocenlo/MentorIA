@@ -17,6 +17,7 @@ function extractJson(texto) {
   return JSON.parse(jsonStr);
 }
 
+// Funcion para consultar el prompt a la IA
 export async function consultarIa(prompt) {
   if(prompt == ""){
     throw new Error('No se encuentra el prompt');
