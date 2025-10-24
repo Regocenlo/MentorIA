@@ -1,7 +1,7 @@
 import { useState } from "react";
 import icono from "../assets/Icono.png";
 
-export default function crearCuenta() {
+export default function CrearCuenta() {
 
     const [correo, setCorreo]= useState();
     const [pass, setPass]= useState();
