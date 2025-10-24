@@ -3,8 +3,8 @@ import icono from "../assets/Icono.png";
 
 export default function CrearCuenta() {
 
-    const [correo, setCorreo]= useState();
-    const [pass, setPass]= useState();
+    const [correo, setCorreo]= useState('');
+    const [pass, setPass]= useState('');
 
     return(
         <div className="mx-auto h-[812px] w-[375px] border
@@ -16,9 +16,20 @@ export default function CrearCuenta() {
             <div className="flex flex-col items-center justify-center h-screen">
                 <p className="text-lg  text-white -translate-y-[270px] -translate-x-[-5px]" >Crear cuenta</p>
                 <p className="text-xs text-white -translate-y-60 -translate-x-[10px]">Introduce tu correo electrónico para registrarte en esta aplicación.</p>
-                <input type="email" placeholder=" email@domain.com" className="bg-white h-10 w-80 rounded-2xl -translate-y-[230px] text-lg text-gray-900" 
-                value={correo} onChange={setCorreo}></input>
-                <input type="password" placeholder=" password" className="bg-white h-10 w-80 rounded-2xl -translate-y-[200px]  text-lg text-gray-900" value={pass} onChange={setPass} ></input>
+                <input 
+                type="email" 
+                placeholder=" email@domain.com" 
+                className="bg-white h-10 w-80 rounded-2xl -translate-y-[230px] text-lg text-gray-900" 
+                value={correo} 
+                onChange={(e)=>setCorreo(e.target.value)}>
+                </input>
+                <input 
+                type="password" 
+                placeholder=" password" 
+                className="bg-white h-10 w-80 rounded-2xl -translate-y-[200px]  text-lg text-gray-900" 
+                value={pass} 
+                onChange={(e)=>setPass(e.target.value)} >
+                </input>
                 <button className="bg-blue-500 text-white 
                     font-semibold text-lg text-medium 
                     h-10 w-80 
