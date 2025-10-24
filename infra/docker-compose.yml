@@ -1,5 +1,5 @@
 services:
-  backend:
+  backend:                      #Backend
     build: ../backend
     ports:
       - "3000:3000"
@@ -8,14 +8,14 @@ services:
       - /app/node_modules       # evita sobrescribir node_modules del contenedor
     environment:
       - NODE_ENV=development
-  frontend:
+  frontend:                     #Frontend
     build:
       context: ../frontend
     ports:
       - "5173:80"
     depends_on:
       - backend
-  ollama:
+  ollama:                       #Modelo de IA
     image: ollama/ollama
     ports:
       - "11434:11434"
@@ -30,5 +30,30 @@ services:
       - ollama-data:/root/.ollama
     entrypoint: >
       sh -c "ollama serve & sleep 5 && ollama pull codellama:7b && wait"  
+  #Sandboxes
+  js-runner:
+    build: ../js-runner
+    ports:
+      - "3001:3001"
+    network_mode: none
+    read_only: true
+  python-runner:
+    build: ../python-runner
+    ports:
+      - "3002:3002"
+    network_mode: none
+    read_only: true
+  go-runner:
+    build: ../go-runner
+    ports:
+      - "3003:3003"
+    network_mode: none
+    read_only: true
+  java-runner:
+    build: ../java-runner
+    ports:
+      - "3004:3004"
+    network_mode: none
+    read_only: true
 volumes:
   ollama-data:

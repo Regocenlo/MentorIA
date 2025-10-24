@@ -34,6 +34,10 @@ router.post('/api/generate_challenge', async (req, res) => {
 //Endpoint donde vamos a darle el outPut del codigo al usuario
 router.post('/api/output_exercite',async (req,res)=>{
   /* Esto lo vamos a hacer con sandboxes
+
+    const response = await axios.post("http://js-runner:3001/run", { code });
+
+
   const {codigo,desafio}=req.body;
 
   const prompt = `
