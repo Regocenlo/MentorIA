@@ -3,6 +3,7 @@ import React from "react";
 import CodeEditor from "./components/CodeEditor";
 import Login from "./components/Login";
 import CrearCuenta from "./components/CrearCuenta";
+import IniciarSesion from "./components/IniciaSesion";
 import { Routes, Route } from "react-router-dom";
 
 export default function App() {
@@ -12,6 +13,7 @@ export default function App() {
         <Routes>
           <Route path="/Login" element={<Login />}></Route>
           <Route path="/CrearCuenta" element={<CrearCuenta />}></Route>
+          <Route path="/IniciaSesion" element={<IniciarSesion />}></Route>
         </Routes>
        
       </div> 

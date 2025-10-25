@@ -1,5 +1,5 @@
 import { useState } from "react";
-import icono from "../assets/Icono.png";
+import logo from "../assets/logo.png";
 
 export default function CrearCuenta() {
 
@@ -11,7 +11,7 @@ export default function CrearCuenta() {
          border-black rounded-3xl shadow-lg 
          bg-purple-900
          relative overflow-hidden">
-        <img src={icono} width={147} height={147} className="mx-auto -translate-z-50 -translate-x-[-5px] y -translate-y-[-90px]" />
+        <img src={logo} width={147} height={147} className="mx-auto -translate-z-50 -translate-x-[-5px] y -translate-y-[-90px]" />
         <h2 className="text-white -translate-y-[-80px] -translate-x-[-8px] font-sans">Mentor <span className="text-white">-</span> <span className="text-blue-600">IA</span></h2>
             <div className="flex flex-col items-center justify-center h-screen">
                 <p className="text-lg  text-white -translate-y-[270px] -translate-x-[-5px]" >Crear cuenta</p>
