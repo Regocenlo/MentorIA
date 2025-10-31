@@ -38,7 +38,6 @@ export default function CrearCuenta() {
                 </button>
                 <p className="text-gray-200 -translate-y-40 font-extralight">-----------o-----------</p>
 
-
             </div>
         </div>
     );
