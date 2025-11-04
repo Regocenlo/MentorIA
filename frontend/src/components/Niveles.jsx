@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 
-export default function (){
+export default function Niveles(){
     
  const botones = [];
  for (let i = 1; i <= 10; i++) {
@@ -14,8 +14,6 @@ const navigate = useNavigate();
 function abrirDesafio(){
     navigate("/InterfazDesafio");
 }
-
-const [activo, setActivo]= useState("inicio");
 
     return(
         <div className=" mx-auto h-[812px] w-[375px] border

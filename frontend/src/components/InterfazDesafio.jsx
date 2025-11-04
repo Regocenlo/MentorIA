@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 
 
-export default function(){
+export default function interfazDesafio(){
 
 const [prompt, setPrompt] = useState("");
 const [respuesta, setRespuesta] = useState("");
@@ -30,7 +30,7 @@ const consultarIA = async () => {
        <textarea
       readOnly
       value={respuesta}
-      className="border rounded p-2 w-full h-20 -translate-y-20 text-lg"
+      className="border rounded p-2 w-full h-20 -translate-y-10 text-lg"
     />
 
     <input
@@ -38,27 +38,27 @@ const consultarIA = async () => {
       value={prompt}
       onChange={(e) => setPrompt(e.target.value)}
       placeholder="Respuesta"
-      className="border rounded p-2 mb-4 w-85 h-80 -translate-y-20"
+      className="border rounded p-2 mb-4 w-85 h-80 -translate-y-10"
     />
 
     <textarea
       readOnly
       value={respuesta}
-      className="border rounded p-2 w-full h-20 -translate-y-20"
+      className="border rounded p-2 w-full h-20 -translate-y-10 text-lg"
     />
 
     <button
       onClick={consultarIA}
-      className="text-xl bg-blue-600 text-white py-2 rounded hover:bg-blue-700 mb-4 w-30 h-14 translate-x-27 -translate-y-20"
+      className="cursor-pointer text-xl bg-blue-600 text-white py-2 rounded hover:bg-blue-700 mb-4 w-30 h-14 translate-x-27 -translate-y-10"
     >Chequear
     </button>
     <div className="grid grid-cols-2 gap-25">
       <button
-      className="text-xl bg-blue-600 text-white py-2 rounded hover:bg-blue-700 mb-4 w-30 h-14 translate-x-0 -translate-y-20"
+      className="cursor-pointer text-xl bg-blue-600 text-white py-2 rounded hover:bg-blue-700 mb-4 w-30 h-14 translate-x-0 -translate-y-10"
     >Volver
     </button>
     <button
-      className="text-xl bg-blue-600 text-white py-2 rounded hover:bg-blue-700 mb-4 w-30 h-14 translate-x-0 -translate-y-20"
+      className="cursor-pointer text-xl bg-blue-600 text-white py-2 rounded hover:bg-blue-700 mb-4 w-30 h-14 translate-x-0 -translate-y-10"
     >Terminar
     </button>
     </div>
