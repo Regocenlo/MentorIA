@@ -23,7 +23,7 @@ services:
       resources:
         reservations:
           devices:
-            - capabilities: [cpu]
+            - capabilities: [gpu]
     environment:
       - OLLAMA_LOW_VRAM_THRESHOLD=8GiB
     volumes:
