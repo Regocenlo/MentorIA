@@ -4,18 +4,18 @@ import axios from "axios";
 
 export default function InterfazDesafio(){
 
-const [prompt, setPrompt] = useState("");
-const [respuesta, setRespuesta] = useState("");
+const [codigo, setCodigo] = useState("");
+const [ejercicio, setEjercicio] = useState("");
 
 
 const consultarIA = async () => {
   if (!prompt) return; // si no hay prompt, no hacer nada
   try {
-    const res = await axios.post("http://localhost:3000/api/generate_challenge", { prompt });
-    setRespuesta(JSON.stringify(res.data, null, 2)); // formatea JSON
+    const res = await axios.post("http://localhost:3000/api/generate_challenge", { codigo });
+    setEjercicio(JSON.stringify(res.data, null, 2)); // formatea JSON
   } catch (err) {
     console.error(err);
-    setRespuesta("Error al consultar la IA.");
+    setEjercicio("Error al consultar la IA.");
   }
 };
 
@@ -29,21 +29,21 @@ const consultarIA = async () => {
    <div className="mt-auto flex flex-col gap-3">
        <textarea
       readOnly
-      value={respuesta}
+      value={ejercicio}
       className="border rounded p-2 w-full h-20 -translate-y-10 text-lg"
     />
 
     <input
       type="text"
-      value={prompt}
-      onChange={(e) => setPrompt(e.target.value)}
+      value={codigo}
+      onChange={(e) => setCodigo(e.target.value)}
       placeholder="Respuesta"
       className="border rounded p-2 mb-4 w-85 h-80 -translate-y-10"
     />
 
     <textarea
       readOnly
-      value={respuesta}
+      value={ejercicio}
       className="border rounded p-2 w-full h-20 -translate-y-10 text-lg"
     />
 
