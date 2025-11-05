@@ -1,7 +1,7 @@
-const express = require("express");
-const fs = require("fs");
-const { exec } = require("child_process");
-const app = express();
+import express from 'express';
+import fs from 'fs';
+import exec from 'child_process';
+const app = express(); 
 app.use(express.json());
 
 app.post("/run", (req, res) => {

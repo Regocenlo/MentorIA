@@ -49,6 +49,9 @@ services:
       - "3003:3003"
     network_mode: none
     read_only: true
+    tmpfs:
+    - /tmp
+    - /home/runner/.cache
   java-runner:
     build: ../java-runner
     ports:
