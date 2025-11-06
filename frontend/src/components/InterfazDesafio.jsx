@@ -11,7 +11,7 @@ const [ejercicio, setEjercicio] = useState("");
 const consultarIA = async () => {
   if (!prompt) return; // si no hay prompt, no hacer nada
   try {
-    const res = await axios.post("http://localhost:3000/api/generate_challenge", { codigo });
+    const res = await axios.post("http://localhost:3000/api/output_exercite", { codigo });
     setEjercicio(JSON.stringify(res.data, null, 2)); // formatea JSON
   } catch (err) {
     console.error(err);

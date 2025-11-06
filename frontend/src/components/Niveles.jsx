@@ -1,5 +1,6 @@
-import { IconChevronLeft, IconHome, IconUserCircle,IconSettingsCog } from '@tabler/icons-react';
+import { IconChevronLeft, IconHome, IconHomeFilled, IconUserCircle,IconSettingsCog } from '@tabler/icons-react';
 import { useNavigate } from "react-router-dom";
+
 
 
 export default function Niveles(){
