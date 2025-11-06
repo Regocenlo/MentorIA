@@ -5,16 +5,23 @@ import axios from "axios";
 export default function InterfazDesafio(){
 
 const [codigo, setCodigo] = useState("");
-const [ejercicio, setEjercicio] = useState("");
+const [ejercicio, setEjercicio] = useState([]);
 
 
 const consultarIA = async () => {
-  if (!prompt) return; // si no hay prompt, no hacer nada
+
   try {
-    const res = await axios.post("http://localhost:3000/api/output_exercite", { codigo });
-    setEjercicio(JSON.stringify(res.data, null, 2)); // formatea JSON
+    const res = await axios.post("http://localhost:3000/api/output_exercite", {codigo});
+    //verificar si res.data.success es verdadero o falso
+    setEjercicio(prev => [
+      ...prev,              
+      ...res.data.logs,     
+      ...res.data.result     
+    ]);
+    
+    //setEjercicio(JSON.stringify(res.data)); // formatea JSON
+
   } catch (err) {
-    console.error(err);
     setEjercicio("Error al consultar la IA.");
   }
 };
@@ -43,7 +50,7 @@ const consultarIA = async () => {
 
     <textarea
       readOnly
-      value={ejercicio}
+      value={ejercicio.join("\n")}
       className="border rounded p-2 w-full h-20 -translate-y-10 text-lg"
     />
 

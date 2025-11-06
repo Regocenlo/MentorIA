@@ -35,7 +35,7 @@ services:
     build: ../js-runner
     ports:
       - "3001:3001"
-    network_mode: none
+    #network_mode: none
     read_only: true
   python-runner:
     build: ../python-runner

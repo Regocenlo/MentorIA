@@ -35,10 +35,10 @@ router.post('/api/generate_challenge', async (req, res) => {
 //Endpoint donde vamos a darle el outPut del codigo al usuario (por el momento solo js)
 router.post('/api/output_exercite',async (req,res)=>{
 
-  const {code}=req.body;
+  const {codigo}=req.body;
 
   try {
-    const response = await axios.post("http://js-runner:3001/run", { code });
+    const response = await axios.post("http://js-runner:3001/run", { codigo });
     res.json(response.data);
     //Esto devuelve un json al frontend, cuando pueda arregarlo je
   } catch (err) {
