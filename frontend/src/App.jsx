@@ -11,7 +11,6 @@ import Niveles from "./components/Niveles.jsx";
 export default function App() {
   return (
     <div className="text-4xl font-bold text-blue-500 text-center mt-10">
-      
         <Routes>
           <Route path="/Login" element={<Login />}></Route>
           <Route path="/CrearCuenta" element={<CrearCuenta />}></Route>
