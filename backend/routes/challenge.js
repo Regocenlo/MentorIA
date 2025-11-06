@@ -1,4 +1,5 @@
 import express from 'express';
+import axios from "axios"
 import { consultarIa } from '../services/ollamaService.js';
 
 const router = express.Router();
@@ -31,36 +32,18 @@ router.post('/api/generate_challenge', async (req, res) => {
   }
 });
 
-//Endpoint donde vamos a darle el outPut del codigo al usuario
+//Endpoint donde vamos a darle el outPut del codigo al usuario (por el momento solo js)
 router.post('/api/output_exercite',async (req,res)=>{
-  /* Esto lo vamos a hacer con sandboxes
 
-    const response = await axios.post("http://js-runner:3001/run", { code });
+  const {code}=req.body;
 
-
-  const {codigo,desafio}=req.body;
-
-  const prompt = `
-    Eres una terminal de programación. 
-    Solo devuelve la salida que tendría este código al ejecutarse. 
-    No agregues explicaciones, comentarios ni ningún texto adicional.
-    Devuélvelo estrictamente en formato JSON así:
-
-    {
-      "Output": "<Aquí la salida exacta de la ejecución>"
-    }
-
-    Código del usuario:
-    ${codigo}
-    `;
-  
   try {
-    const desafio = await consultarIa(prompt);
-    res.json(desafio);
+    const response = await axios.post("http://js-runner:3001/run", { code });
+    res.json(response.data);
     //Esto devuelve un json al frontend, cuando pueda arregarlo je
   } catch (err) {
     res.status(500).json({ error: err.message });
-  }*/
+  }
 });
 
 //Endpoint donde vamos a darle una devolucion de rendimiento al usuario
