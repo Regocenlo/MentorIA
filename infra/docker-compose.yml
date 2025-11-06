@@ -35,13 +35,13 @@ services:
     build: ../js-runner
     ports:
       - "3001:3001"
-    network_mode: none
+    #network_mode: none
     read_only: true
   python-runner:
     build: ../python-runner
     ports:
       - "3002:3002"
-    network_mode: none
+    #network_mode: none
     read_only: true
   go-runner:
     build: ../go-runner
@@ -56,7 +56,7 @@ services:
     build: ../java-runner
     ports:
       - "3004:3004"
-    network_mode: none
+    #network_mode: none
     read_only: true
 volumes:
   ollama-data:
