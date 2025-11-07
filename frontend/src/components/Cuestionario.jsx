@@ -1,4 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+
+/*mx-auto h-[812px] w-[375px] border
+         border-black rounded-3xl shadow-lg 
+         bg-gray-900
+         relative overflow-hidden 
+         Esto da el formato de tipo celular* */
+
+
+
 const Pregunta = ({ numero, titulo, opciones, respuestaSeleccionada, onSeleccionar }) => (
   <div className="mb-8">
     <p className="text-lg font-medium mb-4">
@@ -28,7 +39,14 @@ const Pregunta = ({ numero, titulo, opciones, respuestaSeleccionada, onSeleccion
   </div>
 );
 
+
 export default function Cuestionario() {
+  const navigate = useNavigate();
+
+function procesar(){
+  navigate("/PantallaCarga");
+}
+
  const [respuestas, setRespuestas] = useState({});
   const preguntas = [
     {
@@ -74,7 +92,7 @@ export default function Cuestionario() {
           />
         ))}
 
-        <button className="w-full py-4 bg-white text-black text-lg font-bold rounded-lg mt-12 mb-4 hover:bg-purple-300 transition duration-200">
+        <button onClick={procesar} className="w-full py-4 bg-white text-black text-lg font-bold rounded-lg mt-12 mb-4 hover:bg-purple-300 transition duration-200">
           Continuar
         </button>
       

@@ -1,10 +1,17 @@
 import { useState } from "react";
 import logo from "../assets/logo.png";
+import { useNavigate } from "react-router-dom";
 
 export default function CrearCuenta() {
 
     const [correo, setCorreo]= useState('');
     const [pass, setPass]= useState('');
+    const navigate = useNavigate();
+
+    function cuestionario(){
+        navigate("/Cuestionario");
+    }
+    
 
     return(
         <div className="mx-auto h-[812px] w-[375px] border
@@ -33,7 +40,7 @@ export default function CrearCuenta() {
                 <button className="bg-blue-500 text-white 
                     font-semibold text-lg text-medium 
                     h-10 w-80 
-                    rounded-lg -translate-y-[170px]" >
+                    rounded-lg -translate-y-[170px]" onClick={cuestionario} >
                  Continuar
                 </button>
                 <p className="text-gray-200 -translate-y-40 font-extralight">-----------o-----------</p>

@@ -27,7 +27,6 @@ export default function Inicio(){
         navigate("/InterfazDesafio");
     }
     return( 
-       <div className='bg-black'>
          <div className=" mx-auto h-[812px] w-[375px] border
          border-black rounded-3xl shadow-lg 
          bg-gray-900
@@ -61,6 +60,5 @@ export default function Inicio(){
                 <IconSettingsCog stroke={2} className='h-8 w-8 absolute translate-x-15 -translate-y-2' />
             </div>
         </div>
-       </div> 
     );
 }

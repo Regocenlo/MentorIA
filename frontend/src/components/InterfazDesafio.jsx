@@ -8,7 +8,7 @@ export default function InterfazDesafio(){
 const navigate = useNavigate();
 const [codigo, setCodigo] = useState("");
 const [ejercicio, setEjercicio] = useState([]);
-
+const [error, setError] = useState(false);
 
 
 const consultarIA = async () => {
@@ -16,12 +16,13 @@ const consultarIA = async () => {
   try {
     const res = await axios.post("http://localhost:3000/api/output_exercite", {codigo});
     //verificar si res.data.success es verdadero o falso
-
-    function verificar(res){
-      if(res.data.succes == false){
-
-      }
-    }
+    function verificar(res) {
+  if (res.data.success === false) {
+    setError(true);  
+  } else {
+    setError(false);  
+  }
+}
 
     setEjercicio(prev => [
       ...prev,              
@@ -61,7 +62,8 @@ const consultarIA = async () => {
     <textarea
       readOnly
       value={ejercicio.join("\n")}
-      className="border rounded p-2 w-full h-20 -translate-y-10 text-lg "
+      className='border rounded p-2 w-full h-20 -translate-y-10 text-lg ${error ? "text-red-500 border-red-500" : "text-black border-gray-300"
+}'
     />
 
     <button
