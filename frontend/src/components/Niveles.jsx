@@ -21,8 +21,8 @@ function abrirDesafio(){
          bg-gray-900
          relative overflow-hidden">
             <div id="encabezado" className="bg-gray-600 py-6 flex justify-center">
-                <IconChevronLeft stroke={6} className='absolute flex left-5' />
-                <h1 className="text-3xl font-semibold text-white">
+                <IconChevronLeft stroke={6} className='cursor-pointer active:text-blue-100 absolute flex left-5' onClick={() => navigate(-1)} />
+                <h1 className="text-2xl font-semibold text-white">
             mentor-<span className="text-blue-200">IA</span>
                 </h1>
             </div>
@@ -34,9 +34,9 @@ function abrirDesafio(){
             ))}
             </div>
             <div id="navegacion" className="absolute bg-gray-600 py-6 left-0 w-full h-15 bottom-0 gap-3.5"> 
-                <IconHome stroke={3} className='absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2' />
-                <IconUserCircle stroke={3} className='absolute translate-x-70 -translate-y-1'/>
-                <IconSettingsCog stroke={3} className='absolute translate-x-15 -translate-y-1' />
+                <IconHome stroke={2} className='h-8 w-8 absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2' />
+                <IconUserCircle stroke={2} className='h-8 w-8 absolute translate-x-70 -translate-y-2'/>
+                <IconSettingsCog stroke={2} className='h-8 w-8 absolute translate-x-15 -translate-y-2' />
             </div>
 
        </div>

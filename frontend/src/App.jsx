@@ -7,12 +7,14 @@ import IniciarSesion from "./components/IniciaSesion";
 import InterfazDesafio from "./components/InterfazDesafio";
 import { Routes, Route } from "react-router-dom";
 import Niveles from "./components/Niveles.jsx";
+import Inicio from "./components/Inicio.jsx";
 
 export default function App() {
   return (
     <div className="text-4xl font-bold text-blue-500 text-center mt-10">
         <Routes>
           <Route path="/Login" element={<Login />}></Route>
+          <Route path="/Inicio" element={<Inicio />}></Route>
           <Route path="/CrearCuenta" element={<CrearCuenta />}></Route>
           <Route path="/IniciaSesion" element={<IniciarSesion />}></Route>
           <Route path="/InterfazDesafio" element={<InterfazDesafio />}></Route>

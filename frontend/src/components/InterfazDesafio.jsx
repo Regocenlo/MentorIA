@@ -1,11 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 export default function InterfazDesafio(){
 
+const navigate = useNavigate();
 const [codigo, setCodigo] = useState("");
 const [ejercicio, setEjercicio] = useState([]);
+
 
 
 const consultarIA = async () => {
@@ -13,6 +16,13 @@ const consultarIA = async () => {
   try {
     const res = await axios.post("http://localhost:3000/api/output_exercite", {codigo});
     //verificar si res.data.success es verdadero o falso
+
+    function verificar(res){
+      if(res.data.succes == false){
+
+      }
+    }
+
     setEjercicio(prev => [
       ...prev,              
       ...res.data.logs,     
@@ -36,7 +46,7 @@ const consultarIA = async () => {
    <div className="mt-auto flex flex-col gap-3">
        <textarea
       readOnly
-      value={ejercicio}
+      value='enunciado'
       className="border rounded p-2 w-full h-20 -translate-y-10 text-lg"
     />
 
@@ -51,7 +61,7 @@ const consultarIA = async () => {
     <textarea
       readOnly
       value={ejercicio.join("\n")}
-      className="border rounded p-2 w-full h-20 -translate-y-10 text-lg"
+      className="border rounded p-2 w-full h-20 -translate-y-10 text-lg "
     />
 
     <button
@@ -60,7 +70,7 @@ const consultarIA = async () => {
     >Chequear
     </button>
     <div className="grid grid-cols-2 gap-25">
-      <button
+      <button onClick={() => navigate(-1)}
       className="cursor-pointer text-xl bg-blue-600 text-white py-2 rounded hover:bg-blue-700 mb-4 w-30 h-14 translate-x-0 -translate-y-10"
     >Volver
     </button>
