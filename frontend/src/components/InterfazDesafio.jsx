@@ -17,12 +17,12 @@ const consultarIA = async () => {
     const res = await axios.post("http://localhost:3000/api/output_exercite", {codigo});
     //verificar si res.data.success es verdadero o falso
     function verificar(res) {
-  if (res.data.success === false) {
-    setError(true);  
-  } else {
-    setError(false);  
-  }
-}
+      if (res.data.success === false) {
+      setError(true);  
+    } else {
+      setError(false);  
+      }
+    }
 
     setEjercicio(prev => [
       ...prev,              
@@ -30,7 +30,6 @@ const consultarIA = async () => {
       ...res.data.result     
     ]);
     
-    //setEjercicio(JSON.stringify(res.data)); // formatea JSON
 
   } catch (err) {
     setEjercicio("Error al consultar la IA.");
@@ -88,6 +87,4 @@ const consultarIA = async () => {
    
   </div>
 );
-
-
 }
