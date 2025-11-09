@@ -15,10 +15,9 @@ const [error, setError] = useState(false);
 
 //Funcion para verificar si el output es un exito o un error para asignarle color. Tambieb almacenamos el output en el estado
 function verificar(res) {
-  console.log(res.data)
   if (res.data.success === false) {
     setError(true);
-    setOutput(res.data.error)
+    setOutput([res.data.error])
   } else {
     setError(false);
     setOutput(prev => [
@@ -33,13 +32,13 @@ function verificar(res) {
 const consultarIA = async () => {
 
   try {
-
     const res = await axios.post("http://localhost:3000/api/output_exercite", {codigo});
+    
     //verificar si res.data.success es verdadero o falso
     verificar(res)  
 
   } catch (err) {
-    setOutput(`Error al consultar la IA:${err}`);
+    setOutput(`Error al consultar la IA: ${err}`);
   }
 };
 
@@ -53,7 +52,7 @@ const consultarIA = async () => {
         <textarea
         readOnly
         value={`${desafio}`}
-        className="border rounded p-2 w-full h-20 -translate-y-10 text-lg"
+        className="border rounded p-2 w-full h-20 -translate-y-10 text-sm"
       />
       
       <input
@@ -67,7 +66,7 @@ const consultarIA = async () => {
       <textarea
         readOnly
         value={output.join("\n")}
-        className={`border rounded p-2 w-full h-20 -translate-y-10 text-sm ${error ? 'text-red-500 border-red-500' : 'text-black border-gray-300'}`}
+        className={`border rounded p-2 w-full h-20 -translate-y-10 text-sm ${error ? 'text-red-500 border-red-500' : 'text-white border-gray-300'}`}
       />
 
       <button
