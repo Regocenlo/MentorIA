@@ -10,20 +10,22 @@ const [codigo, setCodigo] = useState("");
 const [ejercicio, setEjercicio] = useState([]);
 const [error, setError] = useState(false);
 
-
+//Funcion para verificar si el output es un exito o un error
+function verificar(res) {
+  if (res.data.success === false) {
+    setError(true);  
+  } else {
+    setError(false);  
+    }
+  }
+  
 const consultarIA = async () => {
 
   try {
     const res = await axios.post("http://localhost:3000/api/output_exercite", {codigo});
     //verificar si res.data.success es verdadero o falso
-    function verificar(res) {
-      if (res.data.success === false) {
-      setError(true);  
-    } else {
-      setError(false);  
-      }
-    }
-
+    verificar(res)  
+    //Almacenamos el output
     setEjercicio(prev => [
       ...prev,              
       ...res.data.logs,     
@@ -32,7 +34,7 @@ const consultarIA = async () => {
     
 
   } catch (err) {
-    setEjercicio("Error al consultar la IA.");
+    setEjercicio(`Error al consultar la IA:${err}`);
   }
 };
 
@@ -55,14 +57,13 @@ const consultarIA = async () => {
       value={codigo}
       onChange={(e) => setCodigo(e.target.value)}
       placeholder="Respuesta"
-      className="border rounded p-2 mb-4 w-85 h-80 -translate-y-10"
+      className="border rounded p-2 mb-4 w-85 h-80 -translate-y-10 text-sm"
     />
 
     <textarea
       readOnly
       value={ejercicio.join("\n")}
-      className='border rounded p-2 w-full h-20 -translate-y-10 text-lg ${error ? "text-red-500 border-red-500" : "text-black border-gray-300"
-}'
+      className={`border rounded p-2 w-full h-20 -translate-y-10 text-sm ${error ? 'text-red-500 border-red-500' : 'text-black border-gray-300'}`}
     />
 
     <button
