@@ -8,7 +8,7 @@ export default function Niveles(){
     const {ejercicios,loading,error}=useGenerateChallenge("javascript","principiante")
     const navigate = useNavigate();
 
-    if (loading) return <p>Cargando desafío...</p>
+    if (loading) return <p>Cargando desafío...</p> //Cambiar por pantalla de carga
     if (error) return <p style={{ color: "red" }}>Error: {error}</p>
     
     const botones = [];
@@ -16,9 +16,18 @@ export default function Niveles(){
             botones.push(i);
     }
 
-    function abrirDesafio(){
-        console.log(ejercicios)
-        navigate("/InterfazDesafio");
+    function abrirDesafio(num){
+
+        if (!ejercicios || ejercicios.length === 0) {
+            console.warn("Ejercicios aún no disponibles");
+            return;
+        }
+
+        //Al ingresar a la navegacion pasamos por parametro el ejercicio correspondiente
+        const desafio=ejercicios[`Ejercicio ${num}`]
+        navigate("/InterfazDesafio",{
+            state:{desafio:desafio}
+        });
     }
 
         return(
@@ -34,7 +43,7 @@ export default function Niveles(){
 
                 <h2 className="text-xl translate-y-76 -translate-x-33">Niveles</h2>
                 <div id="niveles" className="grid grid-cols-4 gap-3 mx-5 justify-center items-center place-content-center h-full ">
-                    {botones.map((num) => (<button key={num} className="border-2 border-blue-600 rounded px-3 py-1 hover:bg-blue-100" onClick={abrirDesafio()}>
+                    {botones.map((num) => (<button key={num} className="border-2 border-blue-600 rounded px-3 py-1 hover:bg-blue-100" onClick={()=>abrirDesafio(num)}>
                         {num}
                     </button>
                 ))}

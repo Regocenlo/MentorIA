@@ -15,8 +15,8 @@ export function useGenerateChallenge(lenguaje, nivel) {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    // Si faltan parámetros, no hace nada
-    if (!lenguaje || !nivel || ejercicios) return //En caso de extraer los ejercicios del localStorage no hacemos la peticion
+    // Si faltan parámetros no hace nada
+    if (!lenguaje || !nivel || ejercicios) return //En caso de extraer los ejercicios del localStorage, no hacemos la peticion
 
     const fetchChallenge = async () => {
       setLoading(true)
