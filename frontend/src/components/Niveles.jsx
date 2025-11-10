@@ -12,8 +12,8 @@ export default function Niveles(){
     if (error) return <p style={{ color: "red" }}>Error: {error}</p>
     
     const botones = [];
-        for (let i = 1; i <= 10; i++) {
-            botones.push(i);
+    for (let i = 1; i <= 10; i++) {
+        botones.push(i);
     }
 
     function abrirDesafio(num){
@@ -24,7 +24,7 @@ export default function Niveles(){
         }
 
         //Al ingresar a la navegacion pasamos por parametro el ejercicio correspondiente
-        const desafio=ejercicios[`Ejercicio ${num}`]
+        const desafio = ejercicios?.[`Ejercicio ${num}`] || ejercicios?.[`Desafio ${num}`]
         navigate("/InterfazDesafio",{
             state:{desafio:desafio}
         });

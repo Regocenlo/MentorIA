@@ -38,8 +38,8 @@ export function useGenerateChallenge(lenguaje, nivel) {
     }
 
     fetchChallenge()
-  }, [lenguaje, nivel, ejercicios])
-  //Necesitamos agregar "ejercicios" a las dependencias de useeffect, quizas traiga problemas a futuro
+  }, [lenguaje, nivel])
+  //No colocamos ejercicios en las dependencias porque podria causar problemas. No le den bola al warning
 
   return { ejercicios, loading, error }
 }
