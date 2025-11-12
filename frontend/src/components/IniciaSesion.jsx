@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import logo from "../assets/logo.png";
 import { supabase } from "./supabaseClient";
-
+import { useNavigate } from "react-router-dom";
 export default function IniciaSesion() {
   const [gmail, setGmail] = useState("");
   const [contraseña, setContraseña] = useState("");
   const [modoRegistro, setModoRegistro] = useState(false);
   const [mensaje, setMensaje] = useState("");
+
+  const navigate = useNavigate();
+
 
   const handleAuth = async (e) => {
     e.preventDefault();
@@ -38,6 +41,9 @@ export default function IniciaSesion() {
 
         if (resultado.error) throw resultado.error;
         setMensaje("Inicio de sesión exitoso ✅");
+
+        navigate("/InterfazDesafio");
+
       }
     } catch (error) {
       console.error("Error en handleAuth:", error.message);
