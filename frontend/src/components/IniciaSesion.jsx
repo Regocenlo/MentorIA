@@ -21,7 +21,7 @@ export default function IniciaSesion() {
           email: gmail,
           password: contraseña,
           options: {
-    emailRedirectTo: "http://localhost:5175/",
+    emailRedirectTo: "http://localhost:5173/",
   },
         });
         console.log("Resultado de registro:", resultado);
