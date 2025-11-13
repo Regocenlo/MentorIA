@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/api/generate_challenge', async (req, res) => {
   const { lenguaje, nivel } = req.body;
 
-  const prompt = `Soy un estudiante autodidacta de ${lenguaje}, mi nivel de conocimiento es ${nivel}. A continuacion necesito que plantees 10 desafios, solo quiero la consigna, que a prueba mis conocimientos. 
+  const prompt = `Soy un estudiante autodidacta de ${lenguaje}, mi nivel de conocimiento es ${nivel}. A continuacion necesito que plantees 10 ejercicios, solo quiero la consigna, que a prueba mis conocimientos. 
     Tu respuesta debe tener el siguiente formato de un json:
   {
   "EJercicio 1": "<Aqui tu ejercicio>",

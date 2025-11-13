@@ -11,7 +11,7 @@ export default function Login() {
   }
 
   function iniciarSesion(){
-    navigate("/IniciaSesion");
+    navigate("/Inicio");
   }
 
   return (
