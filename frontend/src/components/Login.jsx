@@ -15,7 +15,7 @@ export default function Login() {
   }
 
   return (
-   <div className="bg-gray-400 flex w-full h-screen overflow-hidden">
+   <div className="bg-gray-300 flex w-full h-screen overflow-hidden">
 
     
     <div className="w-[60%] text-center relative overflow-hidden">
@@ -32,17 +32,17 @@ export default function Login() {
 
    
       <img src={icono} width={170} height={170} className="mx-auto -translate-z-50  y -translate-y-[-160px]" />
-      <h2 className="text-black  -translate-y-[-156px] font-sans">Mentor <span className="text-white">-</span> <span className="text-blue-600">IA</span></h2>
+      <h2 className="text-blue-600  -translate-y-[-156px] font-sans">Mentor <span className="text-white">-</span> <span className="text-blue-600">IA</span></h2>
       <p className="text-2xl max-w-sm text-center leading-relaxed translate-x-105 translate-y-52 text-gray-200">Aqui aprenderas o reforzaras conceptos importantes de la programación</p>
         
     </div>  
 
-    <div className="bg-gray-600 w-[40%] h-240">
+    <div className="bg-gradient-to-br from-blue-400 via-blue-300 to-purple-500 w-[40%] h-240">
         <div className="flex flex-col items-center justify-center h-screen">
         <p className="text-xl  text-white -translate-y-25 -translate-x-[95px]">En caso de tener una cuenta</p>
         <button className="
         bg-white text-neutral-800 font-semibold text-lg text-medium 
-        h-10 w-106  rounded-lg border-2 -translate-y-25" onClick={iniciarSesion}>
+        h-10 w-106  rounded-lg -translate-y-25" onClick={iniciarSesion}>
           Iniciar sesión
         </button>
         <p className="text-gray-200 -translate-y-20 font-extralight">--------------o--------------</p>
@@ -53,7 +53,7 @@ export default function Login() {
         hover:bg-blue-600 transition -translate-y-14" onClick={crearCuenta} >
             Crear cuenta
           </button>
-          <p className="text-black text-xl">bienvenido a Mentor -<span className="text-blue-600">IA</span> , donde aprenderas lógica y programación</p>
+          <p className="text-white text-xl">bienvenido a Mentor -<span className="text-blue-600">IA</span> , donde aprenderas lógica y programación</p>
         </div>
     </div>
 

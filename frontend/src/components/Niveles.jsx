@@ -3,14 +3,16 @@ import { useNavigate } from "react-router-dom";
 import { useGenerateChallenge } from '../hooks/useGenerateChallenge';
 
 
+
 export default function Niveles(){
 
     const {ejercicios,loading,error}=useGenerateChallenge("javascript","principiante")
     const navigate = useNavigate();
 
-    if (loading) return <p>Cargando desafío...</p> //Cambiar por pantalla de carga
+    /* if (loading) return <p>Cargando desafío...</p> //Cambiar por pantalla de carga
     if (error) return <p style={{ color: "red" }}>Error: {error}</p>
-    
+    * */
+
     const botones = [];
     for (let i = 1; i <= 10; i++) {
         botones.push(i);
@@ -31,30 +33,37 @@ export default function Niveles(){
     }
 
         return(
-            <div className=" mx-auto h-[812px] w-[375px] border border-black rounded-3xl shadow-lg 
-                    bg-gray-900 relative overflow-hidden">
-                <div id="encabezado" className="bg-gray-600 py-6 flex justify-center">
-                    <IconChevronLeft stroke={6} className='cursor-pointer active:text-blue-100 absolute flex left-5' onClick={() => navigate(-1)} />
-                    <h1 className="text-2xl font-semibold text-white">
-                mentor-<span className="text-blue-200">IA</span>
-                    </h1>
-                </div>
+            <div className="   w-full h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-black">
+                <div id="encabezado" className="bg-black/30 backdrop-blur-sm py-6">
+                <h1 className="text-3xl font-semibold text-white">
+            mentor-<span className="text-blue-200">IA</span>
+                </h1>
+            </div>
 
 
-                <h2 className="text-xl translate-y-76 -translate-x-33">Niveles</h2>
-                <div id="niveles" className="grid grid-cols-4 gap-3 mx-5 justify-center items-center place-content-center h-full ">
-                    {botones.map((num) => (<button key={num} className="border-2 border-blue-600 rounded px-3 py-1 hover:bg-blue-100" onClick={()=>abrirDesafio(num)}>
-                        {num}
-                    </button>
-                ))}
+            <h2 className="text-xl text-white mt-10 mb-6 ml-5 font-semibold">Niveles</h2>
+            <div id="niveles" className="grid grid-cols-3 sm:grid-cols-4 gap-4 mx-5 justify-center items-start place-content-start">
+                {botones.map((num) => (
+                <button key={num} onClick={() => abrirDesafio(num)} className="bg-white/10 border border-blue-500/40 text-blue-100 font-medium rounded-lg px-4 py-3
+                hover:bg-blue-500/20 
+                hover:border-blue-300 
+                hover:text-white
+                shadow-md shadow-blue-500/20
+                transition-all">
+                    {num}
+                </button>
+            ))}
+            </div>
+            <div id="navegacion" className="fixed bottom-0 left-0 w-full h-16 bg-gray-900/40 backdrop-blur-md
+             border-t border-white/10
+             flex items-center justify-around
+             text-blue-100"
+>
+                <IconHome stroke={2} className="h-7 w-7 text-blue-400 scale-110" />
+                <IconUserCircle stroke={2} className="h-7 w-7" />
+                <IconSettingsCog stroke={2} className="h-7 w-7" />
+</div>
 
-
-                </div>
-                <div id="navegacion" className="absolute bg-gray-600 py-6 left-0 w-full h-15 bottom-0 gap-3.5"> 
-                    <IconHome stroke={2} className='h-8 w-8 absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2' />
-                    <IconUserCircle stroke={2} className='h-8 w-8 absolute translate-x-70 -translate-y-2'/>
-                    <IconSettingsCog stroke={2} className='h-8 w-8 absolute translate-x-15 -translate-y-2' />
-                </div>
 
             </div>
 
