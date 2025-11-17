@@ -1,90 +1,97 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
+export default function InterfazDesafio() {
 
-export default function InterfazDesafio(){
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { desafio } = location.state;
 
-const navigate = useNavigate();
-const location = useLocation();
-const {desafio}=location.state;//Extraemos el parametro que pasamos en /Nieveles
+  const [codigo, setCodigo] = useState("");
+  const [output, setOutput] = useState([]);
+  const [error, setError] = useState(false);
 
-const [codigo, setCodigo] = useState("");
-const [output, setOutput] = useState([]);
-const [error, setError] = useState(false);
-
-//Funcion para verificar si el output es un exito o un error para asignarle color. Tambieb almacenamos el output en el estado
-function verificar(res) {
-  if (res.data.success === false) {
-    setError(true);
-    setOutput([res.data.error])
-  } else {
-    setError(false);
-    setOutput(prev => [
-      ...prev,              
-      ...res.data.logs,     
-      ...res.data.result     
-    ]);
+  function verificar(res) {
+    if (res.data.success === false) {
+      setError(true);
+      setOutput([res.data.error]);
+    } else {
+      setError(false);
+      setOutput(prev => [
+        ...prev,
+        ...res.data.logs,
+        ...res.data.result
+      ]);
     }
   }
 
-//Funcion para calcular el output del codigo del usuario
-const consultarIA = async () => {
-
-  try {
-    const res = await axios.post("http://localhost:3000/api/output_exercite", {codigo});
-    
-    //verificar si res.data.success es verdadero o falso
-    verificar(res)  
-
-  } catch (err) {
-    setOutput(`Error al consultar la IA: ${err}`);
-  }
-};
-
+  const consultarIA = async () => {
+    try {
+      const res = await axios.post("http://localhost:3000/api/output_exercite", { codigo });
+      verificar(res);
+    } catch (err) {
+      setOutput([`Error al consultar la IA: ${err}`]);
+    }
+  };
 
   return (
-    <div className="mx-auto w-[375px] h-[812px]  border border-black rounded-3xl shadow-lg 
-            bg-gray-900 overflow-hidden p-4 flex flex-col">
-      <h2 className="text-xl font-bold mb-4 text-center">Mentor-IA</h2>
-    
-    <div className="mt-auto flex flex-col gap-3">
+    <div className="min-h-screen bg-gray-900 text-white flex justify-center items-center p-4">
+
+      <div className="w-full max-w-md md:max-w-xl lg:max-w-3xl bg-gray-800 p-6 rounded-2xl shadow-xl flex flex-col gap-6">
+
+        <h2 className="text-2xl md:text-3xl font-bold text-center">Mentor-IA</h2>
+
+        {/* Desafio */}
         <textarea
-        readOnly
-        value={`${desafio}`}
-        className="border rounded p-2 w-full h-20 -translate-y-10 text-sm"
-      />
-      
-      <input
-        type="text"
-        value={codigo}
-        onChange={(e) => setCodigo(e.target.value)}
-        placeholder="Respuesta"
-        className="border rounded p-2 mb-4 w-85 h-80 -translate-y-10 text-sm"
-      />
+          readOnly
+          value={desafio}
+          className="border border-gray-600 bg-gray-700 rounded p-3 w-full h-24 
+                     text-sm md:text-base"
+        />
 
-      <textarea
-        readOnly
-        value={output.join("\n")}
-        className={`border rounded p-2 w-full h-20 -translate-y-10 text-sm ${error ? 'text-red-500 border-red-500' : 'text-white border-gray-300'}`}
-      />
 
-      <button
-        onClick={consultarIA}
-        className="cursor-pointer text-xl bg-blue-600 text-white py-2 rounded hover:bg-blue-700 mb-4 w-30 h-14 translate-x-27 -translate-y-10"
-      >Chequear
-      </button>
-      <div className="grid grid-cols-2 gap-25">
-        <button onClick={() => navigate(-1)}
-        className="cursor-pointer text-xl bg-blue-600 text-white py-2 rounded hover:bg-blue-700 mb-4 w-30 h-14 translate-x-0 -translate-y-10"
-      >Volver
-      </button>
-      <button
-        className="cursor-pointer text-xl bg-blue-600 text-white py-2 rounded hover:bg-blue-700 mb-4 w-30 h-14 translate-x-0 -translate-y-10"
-      >Terminar
-      </button>
+        <textarea
+          value={codigo}
+          onChange={(e) => setCodigo(e.target.value)}
+          placeholder="Escribí tu respuesta aquí..."
+          className="border border-gray-600 bg-gray-700 rounded p-3 w-full h-36 
+                     text-sm md:text-base"
+        />
+
+
+        <textarea
+          readOnly
+          value={output.join("\n")}
+          className={`border rounded p-3 w-full h-28 text-sm md:text-base 
+            ${error ? "border-red-500 text-red-400 bg-red-900/20" 
+                    : "border-gray-600 text-white bg-gray-700"}`}
+        />
+
+        {/* Botones */}
+        <div className="flex flex-col md:flex-row gap-4 mt-4">
+          <button
+            onClick={consultarIA}
+            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded text-lg"
+          >
+            Chequear
+          </button>
+
+          <button
+            onClick={() => navigate(-1)}
+            className="flex-1 bg-gray-600 hover:bg-gray-700 text-white py-3 rounded text-lg"
+          >
+            Volver
+          </button>
+
+          <button
+            className="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 rounded text-lg"
+          >
+            Terminar
+          </button>
+        </div>
+
       </div>
-      </div> 
     </div>
   );
 }

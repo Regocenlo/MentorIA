@@ -13,7 +13,7 @@ import PantallaCarga from "./components/PantallaCarga.jsx"
 
 export default function App() {
   return (
-    <div className="text-4xl font-bold text-blue-500 text-center mt-10">
+    <div className="text-4xl font-bold text-center w-full h-full">
         <Routes>
           <Route index element={<Login />} />
           <Route path="/Login" element={<Login />}></Route>
