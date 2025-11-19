@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import logo from "../assets/logo.png";
+
 export default function Dashboard() {
   const [gmail, setGmail] = useState("");
   const [contraseña, setContraseña] = useState("");
