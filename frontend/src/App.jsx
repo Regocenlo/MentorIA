@@ -10,6 +10,7 @@ import Niveles from "./components/Niveles.jsx";
 import Inicio from "./components/Inicio.jsx";
 import Cuestionario from "./components/Cuestionario.jsx"
 import PantallaCarga from "./components/PantallaCarga.jsx"
+import Feedback from "./components/Feedback.jsx";
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
           <Route path="/PantallaCarga" element={<PantallaCarga />}></Route>
           <Route path="/InterfazDesafio" element={<InterfazDesafio />}></Route>
           <Route path="/Niveles" element={<Niveles />}></Route>
+          <Route path="/Feedback" element={<Feedback />}></Route>
         </Routes>
        
       </div> 
