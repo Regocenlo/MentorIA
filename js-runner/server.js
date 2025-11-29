@@ -30,7 +30,7 @@ app.post("/run", (req, res) => {
     res.json({
       success: true,
       logs,
-      result: result !== undefined ? String(result) : null,
+      result: result !== undefined ? String(result) : "El código se ejecutó pero no devolvió resultado, verifique que la funcion esta siendo llamada",
     });
   } catch (err) {
     res.json({

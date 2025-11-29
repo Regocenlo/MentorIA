@@ -1,6 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
+import CodeMirror from "@uiw/react-codemirror";
+import { javascript } from "@codemirror/lang-javascript";
+import { oneDark } from "@codemirror/theme-one-dark";
 
 export default function InterfazDesafio() {
 
@@ -12,7 +15,7 @@ export default function InterfazDesafio() {
   const [output, setOutput] = useState([]);
   const [error, setError] = useState(false);
 
-  function verificar(res) {
+  function verificar(res) { 
     if (res.data.success === false) {
       setError(true);
       setOutput([res.data.error]);
@@ -25,10 +28,13 @@ export default function InterfazDesafio() {
       ]);
     }
   }
-
+  const handleChange = (value) => {
+    setCodigo(value);
+  };
   const consultarIA = async () => {
+    console.log(codigo);
     try {
-      const res = await axios.post("http://localhost:3000/api/output_exercite", { codigo });
+      const res = await axios.post("/api/output_exercite", { codigo });
       verificar(res);
     } catch (err) {
       setOutput([`Error al consultar la IA: ${err}`]);
@@ -50,15 +56,14 @@ export default function InterfazDesafio() {
                      text-sm md:text-base"
         />
 
-
-        <textarea
+        <CodeMirror
           value={codigo}
-          onChange={(e) => setCodigo(e.target.value)}
-          placeholder="Escribí tu respuesta aquí..."
-          className="border border-gray-600 bg-gray-700 rounded p-3 w-full h-36 
-                     text-sm md:text-base"
+          height="100px"
+          theme={oneDark}
+          extensions={[javascript({ jsx: true })]}
+          onChange={handleChange}
+          className="rounded-lg overflow-hiddenw-full h-24 text-sm md:text-base text-left"
         />
-
 
         <textarea
           readOnly
