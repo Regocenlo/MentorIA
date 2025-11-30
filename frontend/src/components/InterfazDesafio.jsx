@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
+import Feedback from "./Feedback";
 
 export default function InterfazDesafio() {
 
@@ -24,6 +25,10 @@ export default function InterfazDesafio() {
         ...res.data.result
       ]);
     }
+  }
+
+  function finalizar(){
+    navigate("/Feedback")
   }
 
   const consultarIA = async () => {
@@ -86,7 +91,7 @@ export default function InterfazDesafio() {
 
           <button
             className="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 rounded text-lg"
-          >
+          onClick={Feedback}>
             Terminar
           </button>
         </div>
