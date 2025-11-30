@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { oneDark } from "@codemirror/theme-one-dark";
+import Feedback from "./Feedback";
 
 export default function InterfazDesafio() {
 
@@ -31,6 +32,11 @@ export default function InterfazDesafio() {
   const handleChange = (value) => {
     setCodigo(value);
   };
+
+  function finalizar(){
+    navigate("/Feedback")
+  }
+
   const consultarIA = async () => {
     setOutput([]); 
     try {
@@ -91,7 +97,7 @@ export default function InterfazDesafio() {
 
           <button
             className="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 rounded text-lg"
-          >
+          onClick={Feedback}>
             Terminar
           </button>
         </div>
