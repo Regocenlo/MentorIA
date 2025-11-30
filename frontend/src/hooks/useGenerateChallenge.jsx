@@ -23,7 +23,7 @@ export function useGenerateChallenge(lenguaje, nivel) {
       setError(null)
 
       try {
-        const res = await axios.post("http://localhost:3000/api/generate_challenge", {
+        const res = await axios.post("/api/generate_challenge", {
           lenguaje,
           nivel,
         })
@@ -38,7 +38,7 @@ export function useGenerateChallenge(lenguaje, nivel) {
     }
 
     fetchChallenge()
-  }, [lenguaje, nivel])
+  }, [lenguaje, nivel, ejercicios])
   //No colocamos ejercicios en las dependencias porque podria causar problemas. No le den bola al warning
 
   return { ejercicios, loading, error }

@@ -33,8 +33,15 @@ export default function InterfazDesafio() {
     setCodigo(value);
   };
 
-  function finalizar(){
-    navigate("/Feedback")
+  const finalizar = async () => {
+    if(codigo != "" && output != []){
+      navigate("/Feedback", {
+        state: { desafio, codigo, output},
+      });
+    }else{
+      setError(true);
+      setOutput(["Debe escribir codigo y consultar su salida"]);
+    }
   }
 
   const consultarIA = async () => {
@@ -97,7 +104,7 @@ export default function InterfazDesafio() {
 
           <button
             className="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 rounded text-lg"
-          onClick={Feedback}>
+            onClick={() => finalizar()}>
             Terminar
           </button>
         </div>

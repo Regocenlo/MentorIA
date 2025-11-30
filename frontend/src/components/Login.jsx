@@ -7,11 +7,11 @@ export default function Login() {
 
   const navigate = useNavigate();
   function crearCuenta(){
-    navigate("/CrearCuenta");
+    navigate("/IniciaSesion");
   }
 
   function iniciarSesion(){
-    navigate("/Inicio");
+    navigate("/IniciaSesion");
   }
 
   return (
