@@ -26,7 +26,7 @@ export default function Niveles(){
     
                 </div>
         </div>
-      ); //Cambiar por pantalla de carga
+      );
     if (error) return <p style={{ color: "red" }}>Error: {error}</p>
     
 

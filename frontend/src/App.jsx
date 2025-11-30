@@ -1,6 +1,5 @@
 
 import React from "react";
-import CodeEditor from "./components/CodeEditor";
 import Login from "./components/Login";
 import CrearCuenta from "./components/CrearCuenta";
 import IniciarSesion from "./components/IniciaSesion";
@@ -9,7 +8,6 @@ import { Routes, Route } from "react-router-dom";
 import Niveles from "./components/Niveles.jsx";
 import Inicio from "./components/Inicio.jsx";
 import Cuestionario from "./components/Cuestionario.jsx"
-import PantallaCarga from "./components/PantallaCarga.jsx"
 import Feedback from "./components/Feedback.jsx";
 
 export default function App() {
@@ -22,7 +20,6 @@ export default function App() {
           <Route path="/CrearCuenta" element={<CrearCuenta />}></Route>
           <Route path="/Cuestionario" element={<Cuestionario />}></Route>
           <Route path="/IniciaSesion" element={<IniciarSesion />}></Route>
-          <Route path="/PantallaCarga" element={<PantallaCarga />}></Route>
           <Route path="/InterfazDesafio" element={<InterfazDesafio />}></Route>
           <Route path="/Niveles" element={<Niveles />}></Route>
           <Route path="/Feedback" element={<Feedback />}></Route>

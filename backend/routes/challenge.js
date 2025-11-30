@@ -11,16 +11,16 @@ router.post('/api/generate_challenge', async (req, res) => {
   const prompt = `Soy un estudiante autodidacta de ${lenguaje}, mi nivel de conocimiento es ${nivel}. A continuacion necesito que plantees 10 ejercicios, solo quiero la consigna, que a prueba mis conocimientos. 
     Tu respuesta debe tener el siguiente formato de un json:
   {
-  "EJercicio 1": "<Aqui tu ejercicio>",
-  "EJercicio 2": "<Aqui tu ejercicio>",
-  "EJercicio 3": "<Aqui tu ejercicio>",
-  "EJercicio 4": "<Aqui tu ejercicio>",
-  "EJercicio 5": "<Aqui tu ejercicio>",
-  "EJercicio 6": "<Aqui tu ejercicio>",
-  "EJercicio 7": "<Aqui tu ejercicio>",
-  "EJercicio 8": "<Aqui tu ejercicio>",
-  "EJercicio 9": "<Aqui tu ejercicio>",
-  "EJercicio 10": "<Aqui tu ejercicio>"
+  "Ejercicio 1": "<Aqui tu ejercicio>",
+  "Ejercicio 2": "<Aqui tu ejercicio>",
+  "Ejercicio 3": "<Aqui tu ejercicio>",
+  "Ejercicio 4": "<Aqui tu ejercicio>",
+  "Ejercicio 5": "<Aqui tu ejercicio>",
+  "Ejercicio 6": "<Aqui tu ejercicio>",
+  "Ejercicio 7": "<Aqui tu ejercicio>",
+  "Ejercicio 8": "<Aqui tu ejercicio>",
+  "Ejercicio 9": "<Aqui tu ejercicio>",
+  "Ejercicio 10": "<Aqui tu ejercicio>"
   }
   `;
   try {
@@ -47,25 +47,36 @@ router.post('/api/output_exercite',async (req,res)=>{
 });
 
 //Endpoint donde vamos a darle una devolucion de rendimiento al usuario
-router.post('/api/feedback_solution',async (req)=>{
+router.post('/api/feedback_solution',async (req, res)=>{
   const {desafio, codigo, output}=req.body;
+  console.log("----------------------------------------------");
+  console.log(desafio);
+  console.log("----------------------------------------------");
+  console.log(codigo);
+  console.log("----------------------------------------------");
+  console.log(output);
+  console.log("----------------------------------------------");
+  
 
   const prompt = `
     Eres un asistente experto en programación que analiza código y detecta errores.
 
     Te proporcionaré un objeto con los siguientes campos:
     {
-      "desafio": ${desafio},
+      "enunciado": ${desafio},
       "codigo": ${codigo},
-      "output": ${output}
+      "output": ${output.join("\n")}
     }
 
     Tu tarea es:
-    1. Comprender qué intenta hacer el código según el "desafio".
-    2. Determinar cuál sería la **salida esperada** si estuviera correcto.
+    1. Comprender el objetivo del enunciado.
+    2. Determinar cuál sería la **salida esperada** del enunciado.
     3. Comparar la salida esperada con la salida real ("output").
-    4. Si coinciden → success: true  
-      Si difieren → success: false
+    Si coinciden → success: true  
+    Si difieren → success: false
+    4. Determinar si el codigo proporcionado satisface al enunciado.
+    Si coinciden → success: true  
+    Si difieren → success: false
     5. Si hay error, indica de forma breve:
       - En qué línea se encuentra el problema (por número aproximado o descripción clara).
       - Qué está mal y qué debería hacerse para corregirlo.
@@ -74,32 +85,24 @@ router.post('/api/feedback_solution',async (req)=>{
 
     {
       "success": <true o false>,
-      "feedback": "<mensaje breve indicando si la salida es correcta o no>",
-      "solution": "<explicación ordenada del error con número de línea y corrección sugerida, o '' si no hay errores>"
+      "solution": "<Explicación ordenada del problema, si lo hubiera. indicar linea del error y posible solucion, si existiera. En caso de no haber error inficar que el ejercicio se cumplio satisfactoriamente>"
+      "feedback": "<Indicar consejos sobre el codigo del usuario, tanto como si se cumplio el objetivo como si no. Se busca que se den consejos sobre utilizacion de variables, funciones, optimizaciones o demas cuestiones que tengan que ver con buenas tecnicas de desarrollo, Siempre recordando que hablas con desarrolladores principiantes>",
     }
 
     Reglas:
     - Siempre responde en **español**.
-    - Si no hay errores, "solution" debe ser "".
     - No incluyas comentarios, texto fuera del JSON ni explicaciones adicionales.
-    - "feedback" debe describir claramente si la salida coincide o cuál es la diferencia.
-    - "solution" debe ser un texto legible (no un array), por ejemplo:
-      "Error en la línea 3: se usa '-' en lugar de '+'. Debería sumarse numero1 y numero2."
-
-    Ejemplo esperado:
-
-    {
-      "success": false,
-      "feedback": "La salida esperada debe ser 'La suma es: 8', pero la salida real fue 'La suma es: 2'.",
-      "solution": "Error en la línea 3: se usa '-' en lugar de '+'. Debería sumarse numero1 y numero2."
-    }
+    - "feedback" debe fortalecer las tectincas de programacion del usuario.
+    - "solution" debe proporcionar una correccion del codigo de caracter mas formal. ser un texto legible (no un array), por ejemplo:
+    "Error en la línea 3: se usa '-' en lugar de '+'. Debería sumarse numero1 y numero2."
     `;
 
   try {
-    const desafio = await consultarIa(prompt);
-    res.json(desafio);
+    const resultado = await consultarIa(prompt);
+    res.json(resultado);
     //Esto devuelve un json al frontend, cuando pueda arregarlo je
   } catch (err) {
+    console.error("Error en feedback_solution:", err);
     res.status(500).json({ error: err.message });
   }
 });
