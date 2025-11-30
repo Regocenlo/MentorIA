@@ -32,7 +32,7 @@ export default function InterfazDesafio() {
     setCodigo(value);
   };
   const consultarIA = async () => {
-    console.log(codigo);
+    setOutput([]); 
     try {
       const res = await axios.post("/api/output_exercite", { codigo });
       verificar(res);
